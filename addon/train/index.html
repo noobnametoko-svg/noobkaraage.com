@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>鉄道アドオン | NOOBKARAAGE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="../../favicon.png">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Yu Gothic", sans-serif;
+            background: #06070a;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .addon-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .addon-card {
+            background: #111621;
+            border: 1px solid #394155;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .addon-card img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            border: 2px solid #394155;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        .addon-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .addon-desc {
+            font-size: 15px;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .download-button {
+            background:#ff7b00;
+            color:#111;
+            border:none;
+            padding:14px 28px;
+            font-size:18px;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:0.2s;
+            display: inline-block;
+        }
+
+        .download-button:hover {
+            background:#ffaa33;
+        }
+
+        .back {
+            margin-top: 40px;
+        }
+
+        .back a {
+            color:#66aaff;
+            text-decoration:none;
+            font-size:14px;
+        }
+
+        .back a:hover {
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚆 鉄道アドオン一覧</h1>
+
+    <div class="addon-list">
+
+        <!-- ✅ 東武50070系アドオン（カード1） -->
+        <div class="addon-card">
+            <div class="addon-title">東武50070系（純電気ブレーキ・プーン音 / MTC2対応）</div>
+
+            <img src="train.png" alt="東武50070系アドオン">
+
+            <div class="addon-desc">
+                本アドオンは、東武鉄道50070系を再現した鉄道アドオンです。<br>
+                実車の特徴である<strong>純電気ブレーキ方式</strong>を再現し、減速時には
+                「プーン」という電気ブレーキ音がなるように設計されています。(改造あり、自作発言なし)
+            </div>
+
+            <!-- ✅ ダウンロードボタン + カウンター -->
+            <div style="text-align:center; margin-top: 10px;">
+                <a href="train-addon.mcaddon" download onclick="countDownload()">
+                    <button class="download-button">⬇ ダウンロード</button>
+                </a>
+
+                <span id="download-count" style="margin-left:10px; font-size:16px; color:#ccc;">
+                    読み込み中…
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="back">
+        <a href="https://noobnametoko-svg.github.io/noobkaraagesite/addon/">← アドオン一覧に戻る</a>
+    </div>
+
+    <!-- ✅ CountAPI カウンター処理 -->
+    <script>
+        const counterKey = "noobkaraage_train_addon";
+
+        // ✅ ページ読み込み時に現在のカウントを取得
+        fetch(`https://api.countapi.xyz/get/noobkaraage/${counterKey}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("download-count").innerText = data.value + " 回";
+            });
+
+        // ✅ ダウンロードボタンを押したら +1
+        function countDownload() {
+            fetch(`https://api.countapi.xyz/hit/noobkaraage/${counterKey}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("download-count").innerText = data.value + " 回";
+                });
+        }
+    </script>
+
+</body>
+</html>
